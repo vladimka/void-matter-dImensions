@@ -16,13 +16,27 @@ const initialSave = {
 		}
 	],
 	pup1cost : new Decimal(10),
-	pup1multiplier : new Decimal(0)
+	pup1multiplier : new Decimal(0),
+	last_played : new Date()
 }
 
 let save = Object.assign({}, initialSave);
 
 function saveFunction(){
 	localStorage.setItem('save', JSON.stringify(save));
+}
+
+function emulateOfflineTime(timeDiff){
+	let zeroDimension = _save.dimensions[0];
+	_save.dimensions.forEach((d, i) => {
+		if(i == 0)
+			return;
+		let dimension = _save.dimensions[i];
+		zeroDimension.value = zeroDimension.value.plus(dimension.value.mul(dimension.multiplier).mul(timeDiff));
+	});
+	offlineBalance = zeroDimension.value.mul(zeroDimension.multiplier).mul(timeDiff);
+	console.log('while you were away for ' + timeDiff + ' seconds you earned ' + offlineBalance + 'vm');
+	_save.balance = save.balance.plus(offlineBalance);
 }
 
 function load(){
@@ -36,6 +50,9 @@ function load(){
 		_dimension.multiplier = new Decimal(_dimension.multiplier);
 		_dimension.value = new Decimal(_dimension.value);
 	});
+	_save.last_played = new Date(_save.last_played);
+	let timeDiff = (new Date() - _save.last_played) / 1000;
+	emulateOfflineTime(timeDiff);
 	save = Object.assign({}, save, _save);
 }
 

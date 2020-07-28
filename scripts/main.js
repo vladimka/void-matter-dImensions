@@ -40,6 +40,7 @@ function logic(){
 	});
 	mps = zeroDimension.value.mul(zeroDimension.multiplier);
 	save.balance = save.balance.plus(mps.div(20));
+	save.last_played = new Date();
 }
 
 init();
