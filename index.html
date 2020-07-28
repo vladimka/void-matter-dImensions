@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AAAA</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div class="center">
+		<h1>Void Matter: <span id="matter">0</span></h1>
+		<p>Void Matter per second: <span id="mpsText">0</span></p>
+	</div>
+	<div class="tabs-buttons">
+		<button onclick="setTab('dimensions')">Dimensions</button>
+		<button onclick="setTab('prestige')">Prestige</button>
+	</div>
+	<div class="tabs">
+		<div class="tab dimensions active">
+			<div id="dimensions"></div>
+		</div>
+		<div class="tab prestige">
+			<p class="center">Prestige: <span id="prestigePoints">0</span></p>
+			<p>Prestige to gain: <span id="prestigeToGain">0</span></p><br>
+			<button onclick="prestige()">Prestige</button>
+			<ul class="prestige-upgrades">
+				<li class="prestige-upgrades">
+					<p>Prestige upgrade 1: multiplies all dimensions production on 1.05x. Current <span id="pup1multiplier">0.0</span>x</p>
+					<button onclick="buyPUp1()">Buy - <span id="pup1cost">100</span> prestige points</button>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<script src="scripts/tabs.js"></script>
+	<script src="scripts/break_infinity.min.js"></script>
+	<script src="scripts/save.js"></script>
+	<script src="scripts/dimension.js"></script>
+	<script src="scripts/prestige.js"></script>
+	<script src="scripts/main.js"></script>
+</body>
+</html>

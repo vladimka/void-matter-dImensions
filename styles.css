@@ -1,0 +1,32 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.dimension{
+	margin: 10px;
+}
+
+.prestige-upgrades{
+	margin: 10px;
+	list-style: none;
+}
+
+.center{
+	text-align: center;
+	margin: 10px;
+}
+
+.tab{
+	display: none;
+	margin: 10px;
+}
+
+.active{
+	display: block!important;
+}
+
+.tabs-buttons{
+	padding: 10px;
+	text-align: center;
+}
