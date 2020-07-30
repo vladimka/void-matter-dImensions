@@ -26,6 +26,34 @@ function saveFunction(){
 	localStorage.setItem('save', JSON.stringify(save));
 }
 
+function formatToTime(n){
+	let days = parseInt(n/86400);
+	n -= days * 86400;
+
+	let hours = parseInt(n/3600);
+	n -= hours * 3600;
+
+	let minutes = parseInt(n/60);
+	n -= minutes * 60;
+
+	let str = '';
+
+	if(days > 0)
+		str += days + ' days ';
+	if(hours > 0)
+		str += hours + ' hours ';
+	if(minutes > 0)
+		str += minutes + ' minutes ';
+	if(n > 0)
+		str += parseInt(n) + ' seconds ';
+
+	return {
+		seconds : n,
+		days, hours, minutes,
+		str
+	}
+}
+
 function emulateOfflineTime(timeDiff){
 	let zeroDimension = _save.dimensions[0];
 	_save.dimensions.forEach((d, i) => {
@@ -35,7 +63,10 @@ function emulateOfflineTime(timeDiff){
 		zeroDimension.value = zeroDimension.value.plus(dimension.value.mul(dimension.multiplier).mul(timeDiff));
 	});
 	offlineBalance = zeroDimension.value.mul(zeroDimension.multiplier).mul(timeDiff);
-	console.log('while you were away for ' + timeDiff + ' seconds you earned ' + offlineBalance + 'vm');
+	let str = `while you were away for ${formatToTime(timeDiff).seconds}seconds you earned ${offlineBalance.format(0, 2)} Void Matter`;
+	document.querySelector('.offlineModal>p').innerText = str;
+	openModal('offlineModal');
+	console.log(str);
 	_save.balance = save.balance.plus(offlineBalance);
 }
 
